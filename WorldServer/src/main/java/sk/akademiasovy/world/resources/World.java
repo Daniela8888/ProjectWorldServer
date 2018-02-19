@@ -6,6 +6,8 @@ import sk.akademiasovy.world.db.MySQL;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 
 
@@ -56,6 +58,22 @@ public class World {
 
         return result;
     }
+    // 19.2.2018
+
+    private void writeCitiesIntoFile(String s, List<String> list){
+        try {
+            File file=new File(s);
+            FileWriter fw=new FileWriter(file);
+            for(String city:list){
+                fw.write(city+" ");
+            }
+            fw.flush();
+            fw.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    //
 
     @POST
     @Path("/population")
